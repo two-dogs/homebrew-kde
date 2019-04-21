@@ -97,5 +97,9 @@ ln -sfv "$(brew --prefix)/share/krusader" "$HOME/Library/Application Support"
 ln -sfv "$(brew --prefix)/opt/krusader/bin/krusader.app" "$HOME/Applications/KDE/"
 #elisa
 ln -sfv "$(brew --prefix)/opt/elisa/bin/elisa.app" "$HOME/Applications/KDE/"
+#gwenview
+ln -sfv "$(brew --prefix)/share/gwenview" "$HOME/Library/Application Support"
+ln -sfv "$(brew --prefix)/opt/gwenview/bin/gwenview.app" "$HOME/Applications/KDE/"
+ln -sfv "$(brew --prefix)/opt/gwenview_importer/bin/gwenview_importer.app" "$HOME/Applications/KDE/"
 
 exit 0
