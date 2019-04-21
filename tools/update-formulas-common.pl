@@ -96,6 +96,7 @@ my %frameworks = (
 
 my %applications = (
 
+        'gwenview'        => '',
         'dolphin'         => '',
         'kate'            => '',
         'kolourpaint'     => '',
@@ -103,6 +104,7 @@ my %applications = (
         'okular'          => '',
         'kimap'           => '',
         'kmime'           => '',
+        'libkdcraw'       => '',
         'libkexiv2'       => '',
         'libkomparediff2' => '',
         'kio-extras'      => '',
