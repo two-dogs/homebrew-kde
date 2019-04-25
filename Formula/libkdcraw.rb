@@ -5,6 +5,7 @@ class Libkdcraw < Formula
   sha256 "30df02047c0f1b97a7c90c8eb5f7a3c5d322f13e0158395d3f9798ff21ed529e"
 
   head "git://anongit.kde.org/kdcraw.git"
+
   depends_on "cmake" => :build
   depends_on "KDE-mac/kde/kf5-extra-cmake-modules" => :build
   depends_on "ninja" => :build
@@ -27,7 +28,7 @@ class Libkdcraw < Formula
   end
   
   test do
-    (testpath/"CMakeLists.txt").write("find_package(KDcraw)")
-    system bin/"cmake", "."
+    (testpath/"CMakeLists.txt").write("find_package(KDcraw REQUIRED)")
+    system "cmake", ".", "-Wno-dev"
   end
 end

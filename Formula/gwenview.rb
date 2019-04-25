@@ -5,6 +5,7 @@ class Gwenview < Formula
   sha256 "c7d422bddf031fa9d5a23459c65ea6dbb5919e964cc194178a864ee98912b46d"
 
   head "git://anongit.kde.org/gwenview.git"
+
   depends_on "cmake" => :build
   depends_on "KDE-mac/kde/kf5-extra-cmake-modules" => :build
   depends_on "KDE-mac/kde/kf5-kdoctools" => :build
@@ -66,6 +67,8 @@ class Gwenview < Formula
     assert `"#{bin}/gwenview.app/Contents/MacOS/gwenview" --help | grep -- --help` =~ /--help/
   end
 end
+
+# Fix build
 
 __END__
 diff --git a/app/MacOSXBundleInfo.plist.in b/app/MacOSXBundleInfo.plist.in
