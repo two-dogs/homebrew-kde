@@ -30,7 +30,7 @@ class Gwenview < Formula
     args << "-DKDE_INSTALL_QMLDIR=lib/qt5/qml"
     args << "-DKDE_INSTALL_PLUGINDIR=lib/qt5/plugins"
     args << "-DCMAKE_INSTALL_BUNDLEDIR=#{bin}"
-    args << "-DGWENVIEW_SEMANTICINFO_BACKEND:STRING=Fake"
+    args << "-DGWENVIEW_SEMANTICINFO_BACKEND:STRING=None"
 
     mkdir "build" do
       system "cmake", "-G", "Ninja", "..", *args
