@@ -3,7 +3,7 @@ class Okular < Formula
   homepage "https://okular.kde.org"
   url "https://download.kde.org/stable/applications/19.04.0/src/okular-19.04.0.tar.xz"
   sha256 "1947b394dfd8da9c7cc4234e308e2476ffa44dc58542d246eafc8397d8991b6e"
-
+  revision 1
   head "git://anongit.kde.org/okular.git"
 
   depends_on "cmake" => :build
@@ -46,12 +46,39 @@ class Okular < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
-    # Extract Qt plugin path
-    qtpp = `#{Formula["qt"].bin}/qtpaths --plugin-dir`.chomp
+    # Extract Qt plugin and QML2 path
+    mkdir "getqmlpath" do
+      (Pathname.pwd/"main.cpp").write <<~EOS
+        #include <QTextStream>
+        #include <QLibraryInfo>
+        int main() {
+          QTextStream out(stdout);
+          out << QLibraryInfo::location(QLibraryInfo::Qml2ImportsPath) << endl;
+        }
+      EOS
+
+      (Pathname.pwd/"qmlpath.pro").write <<~EOS
+        QT += core
+        TEMPLATE = app
+        TARGET = qmlpath
+        CONFIG += cmdline
+        CONFIG += silent
+        SOURCES += main.cpp
+      EOS
+
+      system "#{Formula["qt"].bin}/qmake"
+      system "make"
+    end
+    qtpp = Utils.popen_read("#{Formula["qt"].bin}/qtpaths --plugin-dir").chomp
+    qml2pp = Utils.popen_read("./getqmlpath/qmlpath").chomp
     system "/usr/libexec/PlistBuddy",
       "-c", "Add :LSEnvironment:QT_PLUGIN_PATH string \"#{qtpp}\:#{HOMEBREW_PREFIX}/lib/qt5/plugins\"",
       "#{bin}/okular.app/Contents/Info.plist"
-  end
+    system "/usr/libexec/PlistBuddy",
+      "-c", "Add :LSEnvironment:QT_PLUGIN_PATH string \"#{qtpp}\:#{HOMEBREW_PREFIX}/lib/qt5/plugins\"",
+      "-c", "Add :LSEnvironment:QML2_IMPORT_PATH string \"#{qml2pp}\:#{HOMEBREW_PREFIX}/lib/qt5/qml\"",
+      "#{bin}/okularkirigami.app/Contents/Info.plist"
+    end
 
   def post_install
     mkdir_p HOMEBREW_PREFIX/"share/okular"
@@ -69,11 +96,13 @@ class Okular < Formula
       ln -sfv "$(brew --prefix)/share/metainfo" "$HOME/Library/Application Support"
       mkdir -pv "$HOME/Applications/KDE"
       ln -sfv "$(brew --prefix)/opt/okular/bin/okular.app" "$HOME/Applications/KDE/"
+      ln -sfv "$(brew --prefix)/opt/okular/bin/okularkirigami.app" "$HOME/Applications/KDE/"
   EOS
   end
 
   test do
     assert `"#{bin}/okular.app/Contents/MacOS/okular" --help | grep -- --help` =~ /--help/
+    assert `"#{bin}/okularkirigami.app/Contents/MacOS/okularkirigami" --help | grep -- --help` =~ /--help/
   end
 end
 

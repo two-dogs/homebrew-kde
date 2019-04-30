@@ -80,6 +80,7 @@ ln -sfv "$(brew --prefix)/opt/kdevelop/bin/kdevelop.app" "$HOME/Applications/KDE
 # okular
 ln -sfv "$(brew --prefix)/share/okular" "$HOME/Library/Application Support"
 ln -sfv "$(brew --prefix)/opt/okular/bin/okular.app" "$HOME/Applications/KDE/"
+ln -sfv "$(brew --prefix)/opt/okular/bin/okularkirigami.app" "$HOME/Applications/KDE/"
 # labplot
 ln -sfv "$(brew --prefix)/share/labplot2" "$HOME/Library/Application Support"
 [ -d "$(brew --prefix)/opt/labplot/bin/labplot2.app" ] && \
