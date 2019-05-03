@@ -16,6 +16,8 @@ class Kf5Kfilemetadata < Formula
   depends_on "exiv2"
   depends_on "ffmpeg"
   depends_on "KDE-mac/kde/kf5-karchive"
+  depends_on "KDE-mac/kde/kf5-kconfig"
+  depends_on "KDE-mac/kde/kf5-kcoreaddons"
   depends_on "KDE-mac/kde/kf5-ki18n"
   depends_on "poppler"
   depends_on "taglib"
@@ -26,6 +28,7 @@ class Kf5Kfilemetadata < Formula
     args << "-DBUILD_QCH=ON"
     args << "-DKDE_INSTALL_QMLDIR=lib/qt5/qml"
     args << "-DKDE_INSTALL_PLUGINDIR=lib/qt5/plugins"
+    args << "-DKDE_INSTALL_QTPLUGINDIR=lib/qt5/plugins"
 
     mkdir "build" do
       system "cmake", "-G", "Ninja", "..", *args
