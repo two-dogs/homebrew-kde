@@ -3,7 +3,7 @@ class Kf5PlasmaFramework < Formula
   homepage "https://www.kde.org"
   url "https://download.kde.org/stable/frameworks/5.57/plasma-framework-5.57.0.tar.xz"
   sha256 "b886aeee6691911ead25e6fd5631fa41ce2330b0fbbdc040717fa576bacae2ca"
-
+  revision 1
   head "git://anongit.kde.org/plasma-framework.git"
 
   depends_on "cmake" => :build
@@ -18,7 +18,6 @@ class Kf5PlasmaFramework < Formula
   depends_on "KDE-mac/kde/kf5-kdeclarative"
   depends_on "KDE-mac/kde/kf5-kirigami2"
 
-  # Mark executables as nongui type
   patch :DATA
 
   def install
@@ -27,6 +26,7 @@ class Kf5PlasmaFramework < Formula
     args << "-DBUILD_QCH=ON"
     args << "-DKDE_INSTALL_QMLDIR=lib/qt5/qml"
     args << "-DKDE_INSTALL_PLUGINDIR=lib/qt5/plugins"
+    args << "-DKDE_INSTALL_QTPLUGINDIR=lib/qt5/plugins"
     args << "-DCMAKE_INSTALL_BUNDLEDIR=#{bin}"
 
     mkdir "build" do
@@ -44,6 +44,14 @@ class Kf5PlasmaFramework < Formula
       ln -sfv "$(brew --prefix)/share/kservicetypes5" "$HOME/Library/Application Support"
       ln -sfv "$(brew --prefix)/share/plasma" "$HOME/Library/Application Support"
   EOS
+  end
+
+  test do
+    (testpath/"CMakeLists.txt").write <<~EOS
+      find_package(KF5Plasma REQUIRED)
+      find_package(KF5PlasmaQuick REQUIRED)
+    EOS
+    system "cmake", ".", "-Wno-dev"
   end
 end
 

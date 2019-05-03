@@ -22,6 +22,7 @@ class Kf5Kiconthemes < Formula
     args << "-DBUILD_TESTING=OFF"
     args << "-DBUILD_QCH=ON"
     args << "-DKDE_INSTALL_QMLDIR=lib/qt5/qml"
+    args << "-DKDE_INSTALL_PLUGINDIR=lib/qt5/plugins"
     args << "-DKDE_INSTALL_QTPLUGINDIR=lib/qt5/plugins"
 
     mkdir "build" do
@@ -30,5 +31,10 @@ class Kf5Kiconthemes < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  test do
+    (testpath/"CMakeLists.txt").write("find_package(KF5IconThemes REQUIRED)")
+    system "cmake", ".", "-Wno-dev"
   end
 end

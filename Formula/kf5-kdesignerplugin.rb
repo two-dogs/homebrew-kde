@@ -14,6 +14,7 @@ class Kf5Kdesignerplugin < Formula
 
   depends_on "KDE-mac/kde/kf5-kio"
   depends_on "KDE-mac/kde/kf5-kplotting"
+
   depends_on "KDE-mac/kde/kf5-kdewebkit" => :optional
 
   def install
@@ -35,5 +36,10 @@ class Kf5Kdesignerplugin < Formula
     You need to take some manual steps in order to make this formula work:
       ln -sfv "$(brew --prefix)/share/kf5" "$HOME/Library/Application Support"
   EOS
+  end
+
+  test do
+    (testpath/"CMakeLists.txt").write("find_package(KF5DesignerPlugin REQUIRED)")
+    system "cmake", ".", "-Wno-dev"
   end
 end

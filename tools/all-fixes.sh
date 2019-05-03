@@ -32,9 +32,7 @@ ln -sfv "$(brew --prefix)/share/kwrite" "$HOME/Library/Application Support"
 ln -sfv "$(brew --prefix)/share/kateproject" "$HOME/Library/Application Support"
 ln -sfv "$(brew --prefix)/share/katexmltools" "$HOME/Library/Application Support"
 ln -sfv "$(brew --prefix)/opt/kate/bin/kate.app" "$HOME/Applications/KDE/"
-ln -sfv "$(brew --prefix)/opt/kwrite/bin/kwrite.app" "$HOME/Applications/KDE/"
-# kf5-kross
-ln -sfv "$(brew --prefix)/opt/kf5-kross/bin/kf5kross.app" "$HOME/Applications/KDE/"
+ln -sfv "$(brew --prefix)/opt/kate/bin/kwrite.app" "$HOME/Applications/KDE/"
 # kio-extras
 ln -sfv "$(brew --prefix)/share/kio_bookmarks" "$HOME/Library/Application Support"
 ln -sfv "$(brew --prefix)/share/kio_info" "$HOME/Library/Application Support"
@@ -61,11 +59,6 @@ ln -sfv "$(brew --prefix)/opt/lokalize/bin/lokalize.app" "$HOME/Applications/KDE
 # okteta
 ln -sfv "$(brew --prefix)/share/okteta" "$HOME/Library/Application Support"
 ln -sfv "$(brew --prefix)/opt/okteta/bin/okteta.app" "$HOME/Applications/KDE/"
-# poxml
-ln -sfv "$(brew --prefix)/opt/poxml/bin/po2xml.app" "$HOME/Applications/KDE/"
-ln -sfv "$(brew --prefix)/opt/poxml/bin/split2po.app" "$HOME/Applications/KDE/"
-ln -sfv "$(brew --prefix)/opt/poxml/bin/swappo.app" "$HOME/Applications/KDE/"
-ln -sfv "$(brew --prefix)/opt/poxml/bin/xml2pot.app" "$HOME/Applications/KDE/"
 # kdevelop
 ln -sfv "$(brew --prefix)/share/kdevappwizard" "$HOME/Library/Application Support"
 ln -sfv "$(brew --prefix)/share/kdevclangsupport" "$HOME/Library/Application Support"

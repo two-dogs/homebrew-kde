@@ -20,6 +20,7 @@ class Kf5Kinit < Formula
     args << "-DBUILD_TESTING=OFF"
     args << "-DKDE_INSTALL_QMLDIR=lib/qt5/qml"
     args << "-DKDE_INSTALL_PLUGINDIR=lib/qt5/plugins"
+    args << "-DKDE_INSTALL_QTPLUGINDIR=lib/qt5/plugins"
 
     mkdir "build" do
       system "cmake", "-G", "Ninja", "..", *args
@@ -28,9 +29,14 @@ class Kf5Kinit < Formula
       prefix.install "install_manifest.txt"
     end
   end
+
+  test do
+    (testpath/"CMakeLists.txt").write("find_package(KF5Init REQUIRED)")
+    system "cmake", ".", "-Wno-dev"
+  end
 end
 
-# Fix the "?"
+# Fix the build
 
 __END__
 diff --git a/src/kdeinit/CMakeLists.txt b/src/kdeinit/CMakeLists.txt

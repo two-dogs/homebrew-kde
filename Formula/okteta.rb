@@ -10,6 +10,7 @@ class Okteta < Formula
   depends_on "KDE-mac/kde/kf5-extra-cmake-modules" => :build
   depends_on "KDE-mac/kde/kf5-kdoctools" => :build
   depends_on "ninja" => :build
+  depends_on "shared-mime-info" => :build
 
   depends_on "hicolor-icon-theme"
   depends_on "KDE-mac/kde/kf5-breeze-icons"
@@ -18,8 +19,6 @@ class Okteta < Formula
   depends_on "KDE-mac/kde/kf5-kparts"
   depends_on "qca"
 
-  patch :DATA
-
   def install
     args = std_cmake_args
     args << "-DBUILD_TESTING=OFF"
@@ -27,6 +26,7 @@ class Okteta < Formula
     args << "-DKDE_INSTALL_PLUGINDIR=lib/qt5/plugins"
     args << "-DKDE_INSTALL_QTPLUGINDIR=lib/qt5/plugins"
     args << "-DCMAKE_INSTALL_BUNDLEDIR=#{bin}"
+    args << "-DUPDATE_MIME_DATABASE_EXECUTABLE=OFF"
 
     mkdir "build" do
       system "cmake", "-G", "Ninja", "..", *args
@@ -61,17 +61,3 @@ class Okteta < Formula
     assert `"#{bin}/okteta.app/Contents/MacOS/okteta" --help | grep -- --help` =~ /--help/
   end
 end
-
-# Avoid the Brew sandbox
-
-__END__
---- a/mimetypes/CMakeLists.txt	2017-10-29 06:06:00.746991760 +0100
-+++ b/mimetypes/CMakeLists.txt	2017-10-29 06:06:13.473170586 +0100
-@@ -3,4 +3,6 @@
- find_package( SharedMimeInfo REQUIRED )
- 
- install( FILES okteta.xml  DESTINATION ${KDE_INSTALL_MIMEDIR} )
--update_xdg_mimetypes( ${KDE_INSTALL_MIMEDIR} )
-+
-+# Need generate out of brew by update-mime-database
-+#update_xdg_mimetypes( ${KDE_INSTALL_MIMEDIR} )

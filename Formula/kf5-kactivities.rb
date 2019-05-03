@@ -25,6 +25,7 @@ class Kf5Kactivities < Formula
     args << "-DBUILD_QCH=ON"
     args << "-DKDE_INSTALL_QMLDIR=lib/qt5/qml"
     args << "-DKDE_INSTALL_PLUGINDIR=lib/qt5/plugins"
+    args << "-DKDE_INSTALL_QTPLUGINDIR=lib/qt5/plugins"
 
     mkdir "build" do
       system "cmake", "-G", "Ninja", "..", *args
@@ -32,6 +33,11 @@ class Kf5Kactivities < Formula
       system "ninja", "install"
       prefix.install "install_manifest.txt"
     end
+  end
+
+  test do
+    (testpath/"CMakeLists.txt").write("find_package(KF5Activities REQUIRED)")
+    system "cmake", ".", "-Wno-dev"
   end
 end
 
@@ -42,13 +48,11 @@ diff --git a/src/cli/CMakeLists.txt b/src/cli/CMakeLists.txt
 index d0e13be..479031b 100644
 --- a/src/cli/CMakeLists.txt
 +++ b/src/cli/CMakeLists.txt
-@@ -30,6 +30,10 @@ target_link_libraries (
+@@ -30,6 +30,8 @@ target_link_libraries (
     KF5::Activities
     )
  
-+ecm_mark_nongui_executable(
-+   kactivities-cli
-+   )
++ecm_mark_nongui_executable(kactivities-cli)
 +
  install (TARGETS
     kactivities-cli

@@ -10,6 +10,7 @@ class Atcore < Formula
   depends_on "cmake" => :build
   depends_on "KDE-mac/kde/kf5-extra-cmake-modules" => :build
   depends_on "ninja" => :build
+
   depends_on "qt"
 
   def install
@@ -45,7 +46,7 @@ class Atcore < Formula
   end
 
   test do
-    (testpath/"CMakeLists.txt").write("find_package(AtCore)")
-    system bin/"cmake", "."
+    (testpath/"CMakeLists.txt").write("find_package(AtCore REQUIRED)")
+    system "cmake", ".", "-Wno-dev"
   end
 end

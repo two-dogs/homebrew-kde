@@ -24,6 +24,7 @@ class Kf5Ktextwidgets < Formula
     args << "-DBUILD_QCH=ON"
     args << "-DKDE_INSTALL_QMLDIR=lib/qt5/qml"
     args << "-DKDE_INSTALL_PLUGINDIR=lib/qt5/plugins"
+    args << "-DKDE_INSTALL_QTPLUGINDIR=lib/qt5/plugins"
 
     mkdir "build" do
       system "cmake", "-G", "Ninja", "..", *args
@@ -37,5 +38,10 @@ class Kf5Ktextwidgets < Formula
     You need to take some manual steps in order to make this formula work:
       ln -sfv "$(brew --prefix)/share/kservicetypes5" "$HOME/Library/Application Support"
   EOS
+  end
+
+  test do
+    (testpath/"CMakeLists.txt").write("find_package(KF5TextWidgets REQUIRED)")
+    system "cmake", ".", "-Wno-dev"
   end
 end
