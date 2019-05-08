@@ -19,6 +19,7 @@ ln -sfv "$(brew --prefix)/share/kservicetypes5" "$HOME/Library/Application Suppo
 ln -sfv "$(brew --prefix)/share/config.kcfg" "$HOME/Library/Application Support"
 ln -sfv "$(brew --prefix)/share/knotifycations5" "$HOME/Library/Application Support"
 ln -sfv "$(brew --prefix)/share/kxmlgui5" "$HOME/Library/Application Support"
+ln -sfv "$(brew --prefix)/share/kpackage" "$HOME/Library/Application Support"
 # kf5-breeze-icons
 ln -sfv "$(brew --prefix)/share/icons" "$HOME/Library/Application Support"
 # kf5-kemoticons
@@ -109,5 +110,8 @@ ln -sfv "$(brew --prefix)/opt/kcalc/bin/kcalc.app" "$HOME/Applications/KDE/"
 ln -sfv "$(brew --prefix)/share/ksysguard" "$HOME/Library/Application Support"
 # ksysguard
 ln -sfv "$(brew --prefix)/opt/ksysguard/bin/ksysguard.app" "$HOME/Applications/KDE/"
+# umbrello
+ln -sfv "$(brew --prefix)/share/umbrello5" "$HOME/Library/Application Support"
+ln -sfv "$(brew --prefix)/opt/umbrello/bin/umbrello5.app" "$HOME/Applications/KDE/"
 
 exit 0
