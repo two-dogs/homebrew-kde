@@ -3,6 +3,7 @@
 # cpan
 brew install perl dbus
 export PERL_MM_USE_DEFAULT=1
+cpan CPAN
 cpan URI URI::Escape
 brew services start dbus
 # common
@@ -108,6 +109,8 @@ ln -sfv "$(brew --prefix)/opt/ksysguard/bin/ksysguard.app" "$HOME/Applications/K
 # umbrello
 ln -sfv "$(brew --prefix)/share/umbrello5" "$HOME/Library/Application Support"
 ln -sfv "$(brew --prefix)/opt/umbrello/bin/umbrello5.app" "$HOME/Applications/KDE"
+# atcore
+ln -sfv "$(brew --prefix)/opt/atcore/bin/AtCoreTest.app" "$HOME/Applications/KDE"
 # kompare
 ln -sfv "$(brew --prefix)/share/kompare" "$HOME/Library/Application Support"
 ln -sfv "$(brew --prefix)/opt/kompare/bin/kompare.app" "$HOME/Applications/KDE"
