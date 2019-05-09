@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # cpan
 brew install perl dbus
 export PERL_MM_USE_DEFAULT=1
@@ -6,6 +8,10 @@ brew services start dbus
 # common
 mkdir -pv "$HOME/Applications/KDE"
 rm -rfv "$HOME/Applications/KDE/*"
+mkdir -pv "$HOME/Library/Application Support/doc"
+rm -rfv "$HOME/Library/Application Support/doc/*"
+ln -sfv "$(brew --prefix)/share/doc/HTML" "$HOME/Library/Application Support/doc"
+ln -sfv "$(brew --prefix)/share/doc/qch" "$HOME/Library/Application Support/doc"
 ln -sfv "$(brew --prefix)/share/kf5" "$HOME/Library/Application Support"
 ln -sfv "$(brew --prefix)/share/kservices5" "$HOME/Library/Application Support"
 ln -sfv "$(brew --prefix)/share/metainfo" "$HOME/Library/Application Support"
@@ -13,6 +19,7 @@ ln -sfv "$(brew --prefix)/share/kservicetypes5" "$HOME/Library/Application Suppo
 ln -sfv "$(brew --prefix)/share/config.kcfg" "$HOME/Library/Application Support"
 ln -sfv "$(brew --prefix)/share/knotifycations5" "$HOME/Library/Application Support"
 ln -sfv "$(brew --prefix)/share/kxmlgui5" "$HOME/Library/Application Support"
+ln -sfv "$(brew --prefix)/share/kpackage" "$HOME/Library/Application Support"
 # kf5-breeze-icons
 ln -sfv "$(brew --prefix)/share/icons" "$HOME/Library/Application Support"
 # kf5-kemoticons
@@ -102,6 +109,9 @@ ln -sfv "$(brew --prefix)/opt/kcalc/bin/kcalc.app" "$HOME/Applications/KDE/"
 ln -sfv "$(brew --prefix)/share/ksysguard" "$HOME/Library/Application Support"
 # ksysguard
 ln -sfv "$(brew --prefix)/opt/ksysguard/bin/ksysguard.app" "$HOME/Applications/KDE/"
+# umbrello
+ln -sfv "$(brew --prefix)/share/umbrello5" "$HOME/Library/Application Support"
+ln -sfv "$(brew --prefix)/opt/umbrello/bin/umbrello5.app" "$HOME/Applications/KDE/"
 # kompare
 ln -sfv "$(brew --prefix)/share/kompare" "$HOME/Library/Application Support"
 ln -sfv "$(brew --prefix)/opt/kompare/bin/kompare.app" "$HOME/Applications/KDE/"

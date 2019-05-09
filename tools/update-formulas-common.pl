@@ -111,7 +111,8 @@ my %applications = (
         'kdenlive'        => '',
         'analitza'        => '',
         'kcalc'           => '',
-        'komparte'        => '',
+        'umbrello'        => '',
+				'kompare'        => '',
         );
 
 my $tmp_dir = '/tmp/kde';
