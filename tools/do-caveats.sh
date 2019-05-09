@@ -111,5 +111,9 @@ ln -sfv "$(brew --prefix)/share/umbrello5" "$HOME/Library/Application Support"
 ln -sfv "$(brew --prefix)/opt/umbrello/bin/umbrello5.app" "$HOME/Applications/KDE"
 # atcore
 ln -sfv "$(brew --prefix)/opt/atcore/bin/AtCoreTest.app" "$HOME/Applications/KDE"
+# gwenview
+ln -sfv "$(brew --prefix)/share/gwenview" "$HOME/Library/Application Support"
+ln -sfv "$(brew --prefix)/opt/gwenview/bin/gwenview.app" "$HOME/Applications/KDE/"
+ln -sfv "$(brew --prefix)/opt/gwenview_importer/bin/gwenview_importer.app" "$HOME/Applications/KDE/"
 
 exit 0
